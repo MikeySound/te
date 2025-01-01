@@ -3,419 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExploitX</title>
+    <title>ExploitX Executor</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, rgb(39, 39, 39), #0f0f3e);
-            color: white;
-            scroll-behavior: smooth;
+            background-color: #121212;
+            color: #fff;
         }
-
-        .header {
-            text-align: center;
-            padding: 100px;
-            background-image: url('background.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 300px;
-        }
-
-        .header h1 {
-            font-size: 70px;
-            color: white;
-            text-shadow: 2px 2px 5px #000000;
-        }
-
-        .hyperion {
-            font-size: 120px;
-            background: linear-gradient(to bottom, #9b59b6, #8e44ad);
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 2px 2px 5px #000000;
-        }
-
-        .buttons {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .buttons button {
-            padding: 15px 30px;
-            font-size: 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .discord-btn {
-            background-color: #7289da;
-            color: white;
-        }
-
-        .download-btn {
-            background-color: #34b7f1;
-            color: white;
-        }
-
-        .download-section, .reviews-section {
-            text-align: center;
-            padding: 50px;
-        }
-
-        .reviews-section {
-            padding-bottom: 0;
-        }
-
-        .review {
-            display: inline-block;
-            background-color: rgba(255, 255, 255, 0.1);
-            margin: 10px;
-            padding: 15px;
-            border-radius: 10px;
-            width: 300px;
-            color: white;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-            text-align: left;
-        }
-
-        .review h3 {
-            margin: 0;
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        .review .star-rating {
-            color: gold;
-            margin-top: 10px;
-        }
-
-        .star-rating span {
-            font-size: 20px;
-        }
-
-        .rating-number {
-            margin-left: 5px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .review img {
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        .warning {
-            background-color: #ffcc00;
-            color: #000;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .developer-links {
+        header {
             display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin-top: 30px;
-            font-size: 18px;
-            color: white;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #1c1c1c;
         }
-
-        .developer {
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        header nav a {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1rem;
+        }
+        header nav a:hover {
+            text-decoration: underline;
+        }
+        main {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            height: calc(100vh - 60px);
+            text-align: center;
         }
-
-        .developer a {
-            color: #34b7f1;
+        main img {
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        main h2 {
+            margin: 10px 0;
+            font-size: 1.5rem;
+        }
+        main p {
+            margin-top: 5px;
+            font-size: 1rem;
+            opacity: 0.5;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .buttons a {
             text-decoration: none;
+            margin: 10px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white;
+            display: inline-block;
+            font-size: 1rem;
+            transition: transform 0.2s, background-position 0.3s;
+            background-size: 200% 200%;
+        }
+        .buttons a:hover {
+            transform: scale(1.1);
+            background-position: 100% 0;
+        }
+        .download {
+            background: linear-gradient(124deg, #00d9ff, #004080);
+            background-size: 200% 200%;
+        }
+        .discord {
+            background: linear-gradient(124deg, #7289da, #23272a);
+            background-size: 200% 200%;
+        }
+        .dotnet {
+            background: linear-gradient(124deg, #ffffff, #0078d7);
+            background-size: 200% 200%;
+            color: #000;
+        }
+        .reviews {
+            background: linear-gradient(124deg, #ffcc00, #ff9900);
+            background-size: 200% 200%;
         }
 
-        .developer a:hover {
-            text-decoration: underline;
-        }
-
-        .developer strong {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .modal {
+        #reviewModal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.8);
             justify-content: center;
             align-items: center;
         }
 
-        .modal-content {
-            background-color: #333;
-            padding: 30px;
+        #reviewForm {
+            background: #1c1c1c;
+            padding: 20px;
             border-radius: 10px;
-            width: 400px;
+            width: 300px;
+            text-align: center;
+            color: #fff;
         }
 
-        .modal-content input, .modal-content textarea {
+        #reviewForm input, #reviewForm textarea {
             width: 100%;
-            padding: 10px;
             margin: 10px 0;
-            border: 1px solid #555;
+            padding: 8px;
             border-radius: 5px;
-            color: white;
-            background-color: #444;
+            background-color: #333;
+            color: #fff;
+            transition: background-color 0.3s;
         }
 
-        .stars input {
-            display: none;
+        #reviewForm input:focus, #reviewForm textarea:focus {
+            background-color: #555;
         }
 
-        .stars label {
-            font-size: 30px;
-            color: grey;
+        .stars {
+            display: flex;
+            justify-content: center;
+        }
+
+        .star {
+            font-size: 2rem;
+            color: #ccc;
             cursor: pointer;
+            transition: color 0.3s;
         }
 
-        .stars input:checked ~ label,
-        .stars label:hover,
-        .stars label:hover ~ label {
-            color: gold;
+        .star.selected {
+            color: #ffcc00;
         }
 
-        .image-preview {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 10px;
+        #reviewForm button {
+            background-color: #00d9ff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
             border-radius: 5px;
-            background-color: #444;
+        }
+
+        #reviewForm .image-upload {
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        #reviewForm .image-upload input {
+            color: #fff;
+        }
+
+        #confirmationModal {
             display: none;
-            background-size: cover;
-            background-position: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #confirmationMessage {
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            color: #fff;
+        }
+
+        #confirmationMessage a {
+            color: #00d9ff;
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>ExploitX executor is here bypassing <span class="hyperion">Hyperion Anticheat 🎉</span></h1>
-    </div>
-
-    <div class="buttons">
-        <button class="discord-btn" onclick="window.location.href='https://discord.gg/s6EY26nNkC'">Discord</button>
-        <button class="download-btn" onclick="smoothScrollToDownloadSection()">Download</button>
-        <button class="discord-btn" onclick="openReviewForm()">Submit Review</button>
-    </div>
-
-    <!-- Reviews Section -->
-    <div id="reviewsSection" class="reviews-section">
-        <h2>User Reviews</h2>
-        <div id="reviewContainer"></div>
-    </div>
-
-    <!-- Download Section -->
-    <div id="downloadSection" class="download-section">
-        <h2>Download Executor and Required Files</h2>
-        <button onclick="window.location.href='https://dotnet.microsoft.com/es-es/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer'">NET (Required)</button>
-        <button onclick="downloadExecutor()">Executor</button>
-        
-        <!-- RAT Warning -->
-        <div class="warning">
-            This Roblox executor is made by darix_yt (dannyext), this is the ONLY official website, others are fake and 101% a RAT. If you think you've been tricked, quickly factory reset your PC. WARNING.
+    <header>
+        <div class="logo">ExploitX</div>
+        <nav>
+            <a href="https://exploitx.vercel.app">Home</a>
+            <a href="https://exploitx.vercel.app/features">Features</a>
+            <a href="https://www.dropbox.com/scl/fi/zuu2fuxzyyckhvd93oilz/ExploitX-Executor.rar?rlkey=29270hblp1byvsvx9c71b11kb&st=p6dopgcx&dl=0">Download</a>
+        </nav>
+    </header>
+    <main>
+        <img src="crosshair-icon.png" alt="Executor Icon" width="100">
+        <h2>ExploitX executor is here bypassing Hyperion Anticheat</h2>
+        <p>Keyless + Free!</p>
+        <div class="buttons">
+            <a href="https://www.dropbox.com/scl/fi/zuu2fuxzyyckhvd93oilz/ExploitX-Executor.rar?rlkey=29270hblp1byvsvx9c71b11kb&st=p6dopgcx&dl=0" class="download">Download Now</a>
+            <a href="https://discord.gg/s6EY26nNkC" class="discord">Join Our Discord!</a>
+            <a href="https://dotnet.microsoft.com/es-es/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer" class="dotnet">Download .NET 4.8</a>
+            <a href="javascript:void(0);" class="reviews" onclick="openReviewModal()">Reviews</a>
         </div>
-    </div>
+    </main>
 
-    <!-- Developer Links Section (Below RAT Warning) -->
-    <div class="developer-links">
-        <div class="developer">
-            <strong>Website Developer:</strong>
-            <a href="https://youtube.com/@poo_ca" target="_blank">poocat_f</a>
-        </div>
-        <div class="developer">
-            <strong>Executor Developer:</strong>
-            <a href="https://discord.gg/s6EY26nNkC" target="_blank">darix_yt & beary</a>
-        </div>
-        <div class="developer">
-            <strong>Other Developer:</strong>
-            <a href="https://youtube.com/@carsonispro29" target="_blank">Carson</a>
-        </div>
-    </div>
-
-    <!-- Modal for Review Form -->
-    <div id="reviewModal" class="modal">
-        <div class="modal-content">
-            <h2>Submit Your Review</h2>
-            <form id="reviewForm">
-                <label for="username">Your Name:</label>
-                <input type="text" id="username" name="username" required>
-                <label for="rating">Rating (1-10):</label>
+    <!-- Review Modal -->
+    <div id="reviewModal">
+        <div id="reviewForm">
+            <h3>Submit a Review</h3>
+            <div>
+                <label for="username">Your Name (Max 20 characters)</label><br>
+                <input type="text" id="username" maxlength="20" placeholder="Your Name" />
+            </div>
+            <div>
+                <label for="discord">Your Discord Name (Optional)</label><br>
+                <input type="text" id="discord" maxlength="50" placeholder="Your Discord Username" />
+            </div>
+            <div>
+                <label for="stars">Stars:</label><br>
                 <div class="stars">
-                    <input type="radio" id="star10" name="rating" value="10"><label for="star10">&#9733;</label>
-                    <input type="radio" id="star9" name="rating" value="9"><label for="star9">&#9733;</label>
-                    <input type="radio" id="star8" name="rating" value="8"><label for="star8">&#9733;</label>
-                    <input type="radio" id="star7" name="rating" value="7"><label for="star7">&#9733;</label>
-                    <input type="radio" id="star6" name="rating" value="6"><label for="star6">&#9733;</label>
-                    <input type="radio" id="star5" name="rating" value="5"><label for="star5">&#9733;</label>
-                    <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
-                    <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
-                    <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
-                    <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                    <span class="star" data-value="6">★</span>
+                    <span class="star" data-value="7">★</span>
+                    <span class="star" data-value="8">★</span>
+                    <span class="star" data-value="9">★</span>
+                    <span class="star" data-value="10">★</span>
                 </div>
-                <label for="reviewText">Review:</label>
-                <textarea id="reviewText" name="reviewText" required></textarea>
+            </div>
+            <div>
+                <label for="review">Thoughts/Review:</label><br>
+                <textarea id="review" placeholder="Write your review here..."></textarea>
+            </div>
+            <div class="image-upload">
+                <label for="profilePic">Pick an image:</label><br>
+                <input type="file" id="profilePic" accept="image/*" />
+            </div>
+            <button onclick="sendReview()">Send Review</button>
+        </div>
+    </div>
 
-                <label for="showDevice">Show Device (Personal Information):</label>
-                <input type="checkbox" id="showDevice" name="showDevice">
-
-                <label for="reviewImage">Upload Image (Optional):</label>
-                <input type="file" id="reviewImage" accept="image/*" onchange="previewImage(event)">
-                <div id="imagePreview" class="image-preview"></div>
-
-                <button type="submit">Submit Review</button>
-            </form>
-            <button onclick="closeReviewForm()">Close</button>
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal">
+        <div id="confirmationMessage">
+            <h3>Great! You've done a review</h3>
+            <p>Join our Discord to see it: <a href="https://discord.gg/s6EY26nNkC" target="_blank">Join our Discord</a></p>
         </div>
     </div>
 
     <script>
-        // Display review dynamically
-        function displayReview(username, rating, reviewText, showDevice, imageURL) {
-            const reviewContainer = document.getElementById('reviewContainer');
-            const reviewDiv = document.createElement('div');
-            reviewDiv.classList.add('review');
+        let selectedStars = 0;
 
-            const reviewHTML = 
-                `<h3>${username}</h3>
-                <div class="star-rating">
-                    <span>${'★'.repeat(rating)}</span>
-                    <span class="rating-number">${rating}</span>
-                </div>
-                <p>${reviewText}</p>
-                ${showDevice ? '<p><strong>Device Info: Available</strong></p>' : ''}
-                ${imageURL ? `<img src="${imageURL}" alt="Review Image">` : ''}`;
+        // Handle star selection
+        const stars = document.querySelectorAll('.star');
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                selectedStars = parseInt(star.dataset.value);
+                stars.forEach(star => star.classList.remove('selected'));
+                for (let i = 0; i < selectedStars; i++) {
+                    stars[i].classList.add('selected');
+                }
+            });
+        });
 
-            reviewDiv.innerHTML = reviewHTML;
-            reviewContainer.appendChild(reviewDiv);
+        // Open and close the review modal
+        function openReviewModal() {
+            document.getElementById('reviewModal').style.display = 'flex';
         }
 
-        // Handle Review Form Submit
-        document.getElementById('reviewForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+        function closeReviewModal() {
+            document.getElementById('reviewModal').style.display = 'none';
+        }
 
+        // Send the review data to the webhook
+        function sendReview() {
             const username = document.getElementById('username').value;
-            const rating = parseInt(document.querySelector('input[name="rating"]:checked').value);
-            const reviewText = document.getElementById('reviewText').value;
-            const showDevice = document.getElementById('showDevice').checked;
-            const imageFile = document.getElementById('reviewImage').files[0];
+            const discord = document.getElementById('discord').value;
+            const reviewText = document.getElementById('review').value;
+            const profilePic = document.getElementById('profilePic').files[0];
 
-            let imageURL = '';
-            if (imageFile) {
-                const reader = new FileReader();
-                reader.onloadend = function() {
-                    imageURL = reader.result;
-                    displayReview(username, rating, reviewText, showDevice, imageURL);
-                };
-                reader.readAsDataURL(imageFile);
-            } else {
-                displayReview(username, rating, reviewText, showDevice, '');
+            if (!username || !reviewText || selectedStars === 0) {
+                alert("Please fill in all fields!");
+                return;
             }
 
-            // Close modal after submission
-            closeReviewForm();
-
-            // Send review data to Discord webhook
-            const webhookUrl = "https://ptb.discord.com/api/webhooks/1323787357266382940/btOnFkie1smwK9o1WyaMRUBbGsvrfTc8h7IWPKKJGYrzBTfvwOAgUaQuagfpWENSENjw";  // Replace with your Discord webhook URL
-            const payload = {
-                content: `New Review Submitted by ${username}`,
-                embeds: [
-                    {
-                        title: "Review Details",
-                        fields: [
-                            {
-                                name: "Username",
-                                value: username,
-                                inline: true
-                            },
-                            {
-                                name: "Rating",
-                                value: `${rating}/10`,
-                                inline: true
-                            },
-                            {
-                                name: "Review",
-                                value: reviewText
-                            },
-                            {
-                                name: "Device Info",
-                                value: showDevice ? "Available" : "Not Available",
-                                inline: true
-                            }
-                        ]
-                    }
-                ]
+            const reviewData = {
+                username: username,
+                discord: discord,
+                stars: selectedStars,
+                reviewText: reviewText,
+                profilePic: profilePic ? URL.createObjectURL(profilePic) : null
             };
 
-            fetch(webhookUrl, {
+            const webhookURL = 'https://ptb.discord.com/api/webhooks/1323787357266382940/btOnFkie1smwK9o1WyaMRUBbGsvrfTc8h7IWPKKJGYrzBTfvwOAgUaQuagfpWENSENjw'; // Replace with your actual webhook URL
+
+            const embed = {
+                title: 'New Review Submitted',
+                description: `**Username:** ${reviewData.username}\n**Discord:** ${reviewData.discord || 'N/A'}\n**Stars:** ${reviewData.stars}\n**Review:** ${reviewData.reviewText}`,
+                fields: [
+                    {
+                        name: 'Stars',
+                        value: '⭐'.repeat(reviewData.stars)
+                    }
+                ],
+                thumbnail: {
+                    url: reviewData.profilePic || 'https://example.com/default-avatar.png'
+                }
+            };
+
+            const payload = {
+                username: 'ExploitX Review Bot',
+                avatar_url: 'https://example.com/bot-avatar.png',
+                embeds: [embed]
+            };
+
+            fetch(webhookURL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(payload)
-            }).then(response => {
+            })
+            .then(response => {
                 if (response.ok) {
-                    console.log("Review sent to Discord.");
+                    document.getElementById('reviewModal').style.display = 'none';
+                    document.getElementById('confirmationModal').style.display = 'flex';
                 } else {
-                    console.error("Error sending review to Discord.");
+                    alert('Failed to submit review.');
                 }
-            }).catch(error => {
-                console.error("Error:", error);
+            })
+            .catch(error => {
+                alert('Error submitting review: ' + error);
             });
-        });
-
-        // Open review form modal
-        function openReviewForm() {
-            document.getElementById('reviewModal').style.display = 'flex';
-        }
-
-        // Close review form modal
-        function closeReviewForm() {
-            document.getElementById('reviewModal').style.display = 'none';
-        }
-
-        // Image preview function
-        function previewImage(event) {
-            const preview = document.getElementById('imagePreview');
-            const file = event.target.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                preview.style.backgroundImage = `url(${e.target.result})`;
-                preview.style.display = 'block';
-            };
-
-            reader.readAsDataURL(file);
-        }
-
-        // Scroll smoothly to download section
-        function smoothScrollToDownloadSection() {
-            document.getElementById('downloadSection').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Download executor
-        function downloadExecutor() {
-            window.location.href = 'https://www.dropbox.com/scl/fi/zuu2fuxzyyckhvd93oilz/ExploitX-Executor.rar?rlkey=29270hblp1byvsvx9c71b11kb&st=sjnmt5i3&dl=0';
         }
     </script>
 </body>
