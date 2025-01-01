@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #222; /* Darker background for the whole site */
+        }
+
+        /* Topbar Styles */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            background-color: #222;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        .topbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        .topbar a:hover {
+            background-color: #555;
+        }
+
+        .topbar .logo {
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        /* Container for Features */
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        /* Rectangle Boxes */
+        .feature-box {
+            background-color: #333;
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            height: 160px;
+            font-size: 22px;
+            color: #fff;
+            flex-direction: column;
+            width: 220px; /* Adjusted width to make all fit in one line */
+            margin: 10px;
+        }
+
+        .feature-box span {
+            font-size: 28px;
+        }
+
+        /* Feature Description Text */
+        .feature-description {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        /* FAQ Section */
+        .faq {
+            margin-top: 40px;
+            width: 80%;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .faq h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+        }
+
+        .faq-item button {
+            width: 100%;
+            padding: 15px;
+            text-align: left;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item button:hover {
+            background-color: #555;
+        }
+
+        .faq-item .answer {
+            padding: 15px;
+            background-color: #f4f4f4; /* Light grey background for the dropdown */
+            border-radius: 10px;
+            display: none;
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Show the answer with fade-in effect */
+        .faq-item.active .answer {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Warning Footer */
+        .warning-footer {
+            background-color: #f8d700;
+            color: #333;
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="logo">ExploitX Features</div>
+        <div>
+            <a href="https://exploitx.vercel.app">Home</a>
+            <a href="#">Download</a>
+            <a href="#">Features</a>
+        </div>
+    </div>
+
+    <!-- Container for Feature Rectangles -->
+    <div class="container">
+        <div class="feature-box">
+            <span>⚡ Fast Execution</span>
+            <div class="feature-description">Executes very fastly.</div>
+        </div>
+        <div class="feature-box">
+            <span>🛡️ Anti-detection</span>
+            <div class="feature-description">Advanced bypass system.</div>
+        </div>
+        <div class="feature-box">
+            <span>🔁 Auto-updates</span>
+            <div class="feature-description">Updates automatically.</div>
+        </div>
+        <div class="feature-box">
+            <span>💰 Free & No key</span>
+            <div class="feature-description">Complete free ($0) and no key required!</div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq">
+        <h3>Frequently Asked Questions</h3>
+
+        <div class="faq-item">
+            <button onclick="toggleFAQ(this)">Is ExploitX safe?</button>
+            <div class="answer">Yes, this is a safe executor.</div>
+        </div>
+
+        <div class="faq-item">
+            <button onclick="toggleFAQ(this)">My antivirus says it's a virus</button>
+            <div class="answer">This is called a false positive, ignore it. Disable your antivirus for a little until you download it.</div>
+
+        <div class="faq-item">
+            <button onclick="toggleFAQ(this)">How do I submit a review?</button>
+            <div class="answer">On our website which is https://getexploitx.vercel.app</div>
+        </div>
+    </div>
+
+    <!-- Footer Warning -->
+    <div class="warning-footer">
+        WARNING: This Roblox executor is made by darix_yt (dannyext). This is the ONLY official site, others are 101% RATS. If you think you've been tricked, factory reset your PC.
+    </div>
+
+    <script>
+        // FAQ toggle functionality with fade-in effect
+        function toggleFAQ(button) {
+            const item = button.parentElement;
+            item.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
+
